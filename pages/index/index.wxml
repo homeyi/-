@@ -1,0 +1,80 @@
+<!--index.wxml-->
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="container">
+    <view class="header">
+      <text class="title">中医诊断系统</text>
+    </view>
+
+    <view class="form-section">
+      <!-- 多个下拉选择器 -->
+      <view class="picker-item">
+        <text class="label">主症状</text>
+        <picker bindchange="bindMainSymptomChange" value="{{mainSymptomIndex}}" range="{{mainSymptoms}}">
+          <view class="picker">
+            {{mainSymptoms[mainSymptomIndex] || '请选择主症状'}}
+          </view>
+        </picker>
+      </view>
+
+      <view class="picker-item">
+        <text class="label">次症状</text>
+        <picker bindchange="bindSecondarySymptomChange" value="{{secondarySymptomIndex}}" range="{{secondarySymptoms}}">
+          <view class="picker">
+            {{secondarySymptoms[secondarySymptomIndex] || '请选择次症状'}}
+          </view>
+        </picker>
+      </view>
+
+      <view class="picker-item">
+        <text class="label">脉象</text>
+        <picker bindchange="bindPulseChange" value="{{pulseIndex}}" range="{{pulseConditions}}">
+          <view class="picker">
+            {{pulseConditions[pulseIndex] || '请选择脉象'}}
+          </view>
+        </picker>
+      </view>
+
+      <view class="picker-item">
+        <text class="label">舌象</text>
+        <picker bindchange="bindTongueChange" value="{{tongueIndex}}" range="{{tongueConditions}}">
+          <view class="picker">
+            {{tongueConditions[tongueIndex] || '请选择舌象'}}
+          </view>
+        </picker>
+      </view>
+
+      <button class="submit-btn" bindtap="submitDiagnosis">开始诊断</button>
+    </view>
+
+    <view class="result-section" wx:if="{{diagnosisResult}}">
+      <text class="result-title">诊断结果</text>
+      <view class="result-content">
+        {{diagnosisResult}}
+      </view>
+    </view>
+
+    <view class="formula-section" wx:if="{{showFormula}}">
+      <text class="formula-title">推荐方剂详情</text>
+      <view class="formula-content">
+        <view class="formula-name">{{formulaName}}</view>
+        <view class="formula-composition">
+          <text class="composition-title">组成：</text>
+          <text>{{formulaComposition}}</text>
+        </view>
+        <view class="formula-usage">
+          <text class="usage-title">用法：</text>
+          <text>{{formulaUsage}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="notice-section" wx:if="{{showNotice}}">
+      <text class="notice-title">注意事项</text>
+      <view class="notice-content">
+        <text>1. 本系统仅供参考，不能替代医生诊断</text>
+        <text>2. 如有严重症状请立即就医</text>
+        <text>3. 请勿擅自服用中药</text>
+      </view>
+    </view>
+  </view>
+</scroll-view>
